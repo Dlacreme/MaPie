@@ -1,22 +1,25 @@
-# mapie
+# MaPie
 
-TODO: Write a description here
+Create an API in a heartbeat.
 
 ## Installation
 
-TODO: Write installation instructions here
+1. `shards install`
+2. `crystal build src/mapie.cr --release`
+3. `sudo mv mapie /usr/bin`
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Create a .pie file at the root of your project
+2. Run `mapie {your_project_name}.pie start`
 
 ## Development
 
-TODO: Write development instructions here
+ - Run `mapie {your_project_name}.pie start --dev`
 
 ## Contributing
 
-1. Fork it (<https://github.com/your-github-user/mapie/fork>)
+1. Fork it (<https://github.com/dlacrene/mapie/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -24,4 +27,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [your-name-here](https://github.com/your-github-user) - creator and maintainer
+- [Mathieu D.](https://github.com/Dlacreme) - creator and maintainer
