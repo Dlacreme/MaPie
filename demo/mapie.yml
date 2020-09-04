@@ -1,0 +1,34 @@
+name: Mapie Demo
+description: Demo of the Mapie API system
+
+
+authors:
+ - Mathieu <mathieu@kalvad.com>
+
+settings:
+  secret_key: mysupersecretkey
+  database_url: postgres://postgres:@localhost:5432/mapie_demo
+
+authentication:
+  roles:
+    - admin
+    - user
+
+models:
+
+  user:
+    format:
+      id: UUID
+      name: VARCHAR(250)
+    seed:
+      -
+        name: "Mathieu"
+    api:
+      url: "/user"
+      GET:
+        access: public
+#     endpoints:
+#       -
+#         url: "/user/search"
+#         access: [admin]
+

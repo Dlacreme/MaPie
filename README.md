@@ -27,4 +27,4 @@ Create an API in a heartbeat.
 
 ## Contributors
 
-- [Mathieu D.](https://github.com/Dlacreme) - creator and maintainer
+- [Mathieu](https://github.com/Dlacreme) - creator and maintainer

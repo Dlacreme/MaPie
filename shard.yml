@@ -2,7 +2,7 @@ name: mapie
 version: 0.1.0
 
 authors:
-  - your-name-here <your-email-here>
+  - Mathieu <mathieu@kalvad.com>
 
 targets:
   mapie:
