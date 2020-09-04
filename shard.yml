@@ -1,0 +1,13 @@
+name: mapie
+version: 0.1.0
+
+authors:
+  - your-name-here <your-email-here>
+
+targets:
+  mapie:
+    main: src/mapie.cr
+
+crystal: 0.35.1
+
+license: MIT
