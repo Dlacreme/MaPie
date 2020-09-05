@@ -1,5 +1,5 @@
 module Mapie
-  class Runner
+  class TaskRunner
     getter config : PieConfig
 
     def initialize(@config : PieConfig)

@@ -1,8 +1,8 @@
 require "./spec_helper"
 
-describe Mapie do
-  conf = Mapie::PieConfig.load_from("./demo/mapie.yml")
+conf = Mapie::PieConfig.load_from("./demo/mapie.yml")
 
+describe "Mapie::PieConfig" do
   it "parse a pie file" do
     conf.name.should eq("Mapie Demo")
   end
@@ -10,8 +10,12 @@ describe Mapie do
   it "can interpret Mapie idioms" do
     conf.interpret_idioms
   end
+end
+
+describe "Mapie::TaskRunner" do
+  task_runner = Mapie::TaskRunner.new conf
 
   it "create migration" do
-    conf.create_migrations
+    task_runner.create_migrations
   end
 end
