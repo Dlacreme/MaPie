@@ -1,6 +1,6 @@
 name: Mapie Demo
 description: Demo of the Mapie API system
-
+version: 0.1
 
 authors:
  - Mathieu <mathieu@kalvad.com>
@@ -16,17 +16,19 @@ authentication:
 
 models:
 
-  user:
+  -
+    name: user
+    table_name: users
     format:
       id: UUID
       name: VARCHAR(250)
-    seed:
-      -
-        name: "Mathieu"
-    api:
-      url: "/user"
-      GET:
-        access: public
+        #    seed:
+        #      -
+        #        name: "Mathieu"
+        #    api:
+        #      url: "/user"
+        #      GET:
+        #        access: public
 #     endpoints:
 #       -
 #         url: "/user/search"

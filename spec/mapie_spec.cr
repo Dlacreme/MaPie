@@ -1,9 +1,17 @@
 require "./spec_helper"
 
 describe Mapie do
-  # TODO: Write tests
+  conf = Mapie::PieConfig.load_from("./demo/mapie.yml")
 
-  it "works" do
-    false.should eq(true)
+  it "parse a pie file" do
+    conf.name.should eq("Mapie Demo")
+  end
+
+  it "can interpret Mapie idioms" do
+    conf.interpret_idioms
+  end
+
+  it "create migration" do
+    conf.create_migrations
   end
 end
