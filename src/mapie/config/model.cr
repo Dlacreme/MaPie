@@ -5,22 +5,22 @@ module Mapie::Config
     include YAML::Serializable
 
     @[YAML::Field(key: "name")]
-    property name : String
+    getter name : String
 
     @[YAML::Field(key: "table_name")]
-    property table_name : String
+    getter table_name : String
 
     @[YAML::Field(key: "format")]
-    property format : Hash(String, String)
+    getter format : Hash(String, String)
 
     # @[YAML::Field(key: "seed")]
-    # property name : String
+    # getter name : String
 
     # @[YAML::Field(key: "name")]
-    # property name : String
+    # getter name : String
 
     # @[YAML::Field(key: "name")]
-    # property name : String
+    # getter name : String
 
     def pretty_print
       puts sprintf "[%s] as %s:", self.table_name, self.name

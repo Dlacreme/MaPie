@@ -7,25 +7,25 @@ module Mapie
     include YAML::Serializable
 
     @[YAML::Field(key: "name")]
-    property name : String
+    getter name : String
 
     @[YAML::Field(key: "description")]
-    property description : String?
+    getter description : String?
 
     @[YAML::Field(key: "version")]
-    property version : String?
+    getter version : String?
 
     @[YAML::Field(key: "authors")]
-    property authors : Array(String)
+    getter authors : Array(String)
 
     @[YAML::Field(key: "settings")]
-    property settings : ConfigSettings
+    getter settings : ConfigSettings
 
     @[YAML::Field(key: "authentication")]
-    property authentication : ConfigAuthentication
+    getter authentication : ConfigAuthentication
 
     @[YAML::Field(key: "models")]
-    property models : Array(ConfigModel)
+    getter models : Array(ConfigModel)
 
     # Build a Config instance using the content of @file_path
     def self.load_from(file_path : String)
@@ -40,10 +40,6 @@ module Mapie
 
     # Parse all Mapie idioms to build usable set of data
     def interpret_idioms
-    end
-
-    # Go through models and write each migrations
-    def create_migrations
     end
   end
 end
