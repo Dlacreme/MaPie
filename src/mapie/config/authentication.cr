@@ -1,7 +1,7 @@
 require "yaml"
 
 module Mapie::Config
-  class ConfigAuthentication
+  class Authentication
     include YAML::Serializable
 
     @[YAML::Field(key: "roles")]

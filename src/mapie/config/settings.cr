@@ -1,7 +1,7 @@
 require "yaml"
 
 module Mapie::Config
-  class ConfigSettings
+  class Settings
     include YAML::Serializable
 
     @[YAML::Field(key: "secret_key")]

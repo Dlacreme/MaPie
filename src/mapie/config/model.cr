@@ -1,7 +1,7 @@
 require "yaml"
 
 module Mapie::Config
-  class ConfigModel
+  class Model
     include YAML::Serializable
 
     @[YAML::Field(key: "name")]

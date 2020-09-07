@@ -13,6 +13,10 @@ describe "Mapie::PieConfig" do
 end
 
 describe "Mapie::TaskRunner" do
+  begin
+    Dir.delete("./.mapie")
+  rescue
+  end
   task_runner = Mapie::TaskRunner.new conf
 
   it "create migration" do
