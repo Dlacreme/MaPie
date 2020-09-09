@@ -14,7 +14,7 @@ end
 
 describe "Mapie::TaskRunner" do
   begin
-    Dir.delete("./.mapie")
+    Dir.delete(".mapie")
   rescue
   end
   task_runner = Mapie::TaskRunner.new conf
