@@ -20,7 +20,8 @@ models:
     name: user
     table_name: users
     format:
-      id: {type: UUID, primary_key: true}
+      id: {type: UUID PRIMARY KEY}
+      email: {type: VARCHAR(500) UNIQUE NOT NULL}
       name: {type: VARCHAR(250)}
         #    seed:
         #      -

@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
-  id UUID,
+  id UUID PRIMARY KEY,
+  email VARCHAR(500) UNIQUE NOT NULL,
   name VARCHAR(250)
 );
