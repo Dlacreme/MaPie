@@ -20,8 +20,8 @@ models:
     name: user
     table_name: users
     format:
-      id: UUID
-      name: VARCHAR(250)
+      id: {type: UUID, primary_key: true}
+      name: {type: VARCHAR(250)}
         #    seed:
         #      -
         #        name: "Mathieu"

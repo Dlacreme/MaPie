@@ -5,6 +5,7 @@ conf = Mapie::PieConfig.load_from("./demo/mapie.yml")
 describe "Mapie::PieConfig" do
   it "parse a pie file" do
     conf.name.should eq("Mapie Demo")
+    conf.pretty_print
   end
 
   it "can interpret Mapie idioms" do

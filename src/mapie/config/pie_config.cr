@@ -39,6 +39,7 @@ module Mapie
 
     # Parse all Mapie idioms to build usable set of data
     def interpret_idioms
+      # Nothing yet
     end
   end
 end
