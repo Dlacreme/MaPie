@@ -1,3 +1,5 @@
+require "ecr"
+
 module Mapie::Task
   class Migration
     MIGRATION_FOLDER = "migrations"
@@ -16,6 +18,8 @@ module Mapie::Task
 
     def write_migration(model : Config::Model)
       fd = @writer.create_and_open_file self.get_migration_filename(model.table_name)
+      fd << ECR.render "src/mapie/task_runner/templates/migration.ecr"
+      fd.close
     end
 
     def get_migration_filename(table_name : String) : String

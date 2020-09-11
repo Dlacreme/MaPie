@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS <%= model.table_name %>;
+
+CREATE TABLE <%= model.table_name %> (
+<%- model.format.each do |k, v| -%>
+  <%- unless model.format.first_key == k -%>
+,
+  <%- end -%>
+  <%= k %> <%= v.type -%>
+<%- end -%>
+
+);
