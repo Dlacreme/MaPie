@@ -8,10 +8,13 @@ module Mapie
     getter name : String
 
     @[YAML::Field(key: "description")]
-    getter description : String?
+    getter description : String = ""
 
     @[YAML::Field(key: "version")]
-    getter version : String?
+    getter version : String = "0.1.0"
+
+    @[YAML::Field(key: "output")]
+    getter output : String = ".mapie"
 
     @[YAML::Field(key: "authors")]
     getter authors : Array(String)

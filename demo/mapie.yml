@@ -1,6 +1,7 @@
 name: Mapie Demo
 description: Demo of the Mapie API system
 version: 0.1
+output: demo/project
 
 authors:
  - Mathieu <mathieu@kalvad.com>

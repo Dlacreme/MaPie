@@ -8,7 +8,7 @@ module Mapie
     private property migration : Task::Migration
 
     def initialize(@config : PieConfig)
-      @writer = Task::Writer.new ROOT_FOLDER
+      @writer = Task::Writer.new config.output
       @migration = Task::Migration.new @writer
       self.setup
     end
