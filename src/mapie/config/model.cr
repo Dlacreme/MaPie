@@ -26,6 +26,9 @@ module Mapie::Config
     @[YAML::Field(key: "format")]
     getter format : Hash(String, ModelFormat)
 
+    @[YAML::Field(key: "endpoint")]
+    getter endpoint : String?
+
     # Simply print the model
     def pretty_print
       puts sprintf "[%s] as %s:", self.table_name, self.name

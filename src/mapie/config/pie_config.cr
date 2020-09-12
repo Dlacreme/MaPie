@@ -22,6 +22,9 @@ module Mapie
     @[YAML::Field(key: "settings")]
     getter settings : Config::Settings
 
+    @[YAML::Field(key: "database")]
+    getter database : Config::Database
+
     @[YAML::Field(key: "authentication")]
     getter authentication : Config::Authentication
 

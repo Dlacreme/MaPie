@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS <%= model.table_name %>;
+-- --
+-- Model: <%= model.table_name %>
 
 CREATE TABLE <%= model.table_name %> (
 <%- model.format.each do |k, v| -%>
@@ -9,3 +10,7 @@ CREATE TABLE <%= model.table_name %> (
 <%- end -%>
 
 );
+
+-- End: <%= model.table_name %>
+-- --
+

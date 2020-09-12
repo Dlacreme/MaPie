@@ -20,7 +20,7 @@ module Mapie
 
     # Go through models and write each migrations
     def create_migrations
-      self.migration.create self.config.models
+      self.migration.create self.config, nil
     end
   end
 end
