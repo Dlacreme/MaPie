@@ -9,6 +9,7 @@ CREATE TABLE users (
   role VARCHAR(25) NOT NULL DEFAULT 'user'
 );
 
+
 -- End: users
 -- --
 
@@ -23,6 +24,7 @@ CREATE TABLE user_profiles (
   description text
 );
 
+
 -- End: user_profiles
 -- --
 
@@ -33,8 +35,10 @@ CREATE TABLE user_friends (
   from_user_id UUID,
   to_user_id UUID,
   created_at TIMESTAMP NOT NULL DEFAULT NOW,
-  validated_at TIMESTAMP NULL
+  validated_at TIMESTAMP NULL,
+  PRIMARY KEY(from_user_id, to_user_id)
 );
+
 
 -- End: user_friends
 -- --
@@ -47,6 +51,7 @@ CREATE TABLE groups (
   created_by UUID NOT NULL,
   deleted_at TIMESTAMP NULL DEFAULT NULL
 );
+
 
 -- End: groups
 -- --
