@@ -1,6 +1,6 @@
 require "ecr"
 
-module Mapie::Task
+module Mapie::TaskRunner_
   class Migration
     MIGRATION_FOLDER = "migrations"
 
@@ -10,7 +10,7 @@ module Mapie::Task
     end
 
     # Write a migration required to match @current config. If @previous is null, write the initial schema
-    def create(current : PieConfig, previous : PieConfig?)
+    def create(current : Config, previous : Config?)
       @writer.create_or_clear_folder MIGRATION_FOLDER
       fd = @writer.create_and_open_file "#{MIGRATION_FOLDER}/migration_#{current.version}.pgsql"
       current.models.each { |x| write_migration fd, x }
@@ -18,7 +18,7 @@ module Mapie::Task
       fd.close if fd
     end
 
-    def write_migration(fd : File, model : Config::Model)
+    def write_migration(fd : File, model : Config_::Model)
       fd << ECR.render "src/mapie/task_runner/templates/migration.ecr"
     end
 

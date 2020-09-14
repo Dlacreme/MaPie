@@ -62,7 +62,7 @@ models:
       id: {type: UUID PRIMARY KEY}
       email: {type: VARCHAR(500) UNIQUE NOT NULL}
       password: {type: VARCHAR(500) NOT NULL}
-      profile_id: {type: UUID UNIQUE, one_to_one: {name: profile, foreign_name: user}}
+      profile_id: {type: UUID UNIQUE, one_to_one: {related_to: profile, related_name: user}}
       role: {type: VARCHAR(25) NOT NULL DEFAULT 'user', usage: authentication}
 
   -
@@ -79,7 +79,7 @@ models:
     name: friendship
     table_name: user_friends
     format:
-      from_user_id: {type: UUID, many_to_many: {many_to_many: true}}
+      from_user_id: {type: UUID}
       to_user_id: {type: UUID}
       created_at: {type: TIMESTAMP NOT NULL DEFAULT NOW}
       validated_at: {type: TIMESTAMP NULL}
@@ -91,7 +91,7 @@ models:
     table_name: groups
     format:
       id: {type: UUID PRIMARY KEY}
-      created_by: {type: UUID NOT NULL, one_to_many: {name: user, foreign_name: groups}}
+      created_by: {type: UUID NOT NULL, one_to_many: {related_to: user, related_name: groups}}
       deleted_at: {type: TIMESTAMP NULL DEFAULT NULL, usage: soft_delete}
 
 ## Glossary

@@ -2,14 +2,14 @@ module Mapie
   class TaskRunner
     ROOT_FOLDER = ".mapie"
 
-    getter config : PieConfig
+    getter config : Config
 
-    private property writer : Task::Writer
-    private property migration : Task::Migration
+    private property writer : TaskRunner_::Writer
+    private property migration : TaskRunner_::Migration
 
-    def initialize(@config : PieConfig)
-      @writer = Task::Writer.new config.output
-      @migration = Task::Migration.new @writer
+    def initialize(@config : Config)
+      @writer = TaskRunner_::Writer.new config.output
+      @migration = TaskRunner_::Migration.new @writer
       self.setup
     end
 

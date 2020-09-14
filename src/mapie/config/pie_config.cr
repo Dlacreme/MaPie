@@ -1,7 +1,7 @@
 require "yaml"
 
 module Mapie
-  class PieConfig
+  class Config
     include YAML::Serializable
 
     @[YAML::Field(key: "name")]
@@ -20,20 +20,20 @@ module Mapie
     getter authors : Array(String)
 
     @[YAML::Field(key: "settings")]
-    getter settings : Config::Settings
+    getter settings : Config_::Settings
 
     @[YAML::Field(key: "database")]
-    getter database : Config::Database
+    getter database : Config_::Database
 
     @[YAML::Field(key: "authentication")]
-    getter authentication : Config::Authentication
+    getter authentication : Config_::Authentication
 
     @[YAML::Field(key: "models")]
-    getter models : Array(Config::Model)
+    getter models : Array(Config_::Model)
 
     # Build a Config instance using the content of @file_path
     def self.load_from(file_path : String)
-      File.open(file_path) { |f| PieConfig.from_yaml(f) }
+      File.open(file_path) { |f| Config.from_yaml(f) }
     end
 
     # Simply print the loaded config

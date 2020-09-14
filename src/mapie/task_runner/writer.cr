@@ -1,6 +1,6 @@
 require "file_utils"
 
-module Mapie::Task
+module Mapie::TaskRunner_
   class Writer
     getter root_folder_pathname : String
 

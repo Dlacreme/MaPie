@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-conf = Mapie::PieConfig.load_from("./demo/mapie.yml")
+conf = Mapie::Config.load_from("./demo/mapie.yml")
 
 describe "Mapie::PieConfig" do
   it "parse a pie file" do

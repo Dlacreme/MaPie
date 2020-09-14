@@ -1,6 +1,6 @@
 require "yaml"
 
-module Mapie::Config
+module Mapie::Config_
   class Authentication
     include YAML::Serializable
 
