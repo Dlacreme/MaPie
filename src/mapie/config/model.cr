@@ -27,6 +27,12 @@ module Mapie::Config_
   end
 
   module Model_
+    enum Relationship
+      OneToOne
+      OneToMany
+      ManyToMany
+    end
+
     class Format
       include YAML::Serializable
 

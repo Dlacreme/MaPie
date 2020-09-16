@@ -58,9 +58,11 @@ CREATE TABLE groups (
 
 -- users.profile_id -> user_profiles.id --
 ALTER TABLE users 
-  ADD CONSTRAINT otm_user_profiles FOREIGN KEY (profile_id) REFERENCES user_profiles(id) ;
+  ADD CONSTRAINT OneToOne_user_profiles FOREIGN KEY (profile_id)
+  REFERENCES user_profiles(id) ;
 -- 
 -- groups.created_by -> users.id --
 ALTER TABLE groups 
-  ADD CONSTRAINT mtm_users FOREIGN KEY (created_by) REFERENCES users(id) ;
+  ADD CONSTRAINT OneToMany_users FOREIGN KEY (created_by)
+  REFERENCES users(id) ;
 -- 

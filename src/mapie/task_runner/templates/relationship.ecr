@@ -1,4 +1,5 @@
 -- <%= relationship.table_name %>.<%= relationship.foreign_key %> -> <%= relationship.reference_to %>.<%= relationship.reference_key %> --
 ALTER TABLE <%= relationship.table_name %> 
-  ADD CONSTRAINT <%= relationship.type %>_<%=  relationship.reference_to %> FOREIGN KEY (<%= relationship.foreign_key %>) REFERENCES <%= relationship.reference_to %>(<%= relationship.reference_key %>) <%= relationship.rules %>;
+  ADD CONSTRAINT <%= relationship.type.to_s %>_<%=  relationship.reference_to %> FOREIGN KEY (<%= relationship.foreign_key %>)
+  REFERENCES <%= relationship.reference_to %>(<%= relationship.reference_key %>) <%= relationship.rules %>;
 -- 
