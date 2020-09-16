@@ -31,7 +31,7 @@ module Mapie::Config_
       include YAML::Serializable
 
       @[YAML::Field(key: "type")]
-      getter type : String
+      property type : String
 
       @[YAML::Field(key: "usage")]
       getter usage : String?
@@ -59,6 +59,9 @@ module Mapie::Config_
 
       @[YAML::Field(key: "related_name")]
       getter related_name : String
+
+      @[YAML::Field(key: "rules")]
+      getter rules : String?
     end
 
     class ManyToManyRelationship

@@ -13,18 +13,52 @@ module Mapie::TaskRunner_
     def create(current : Config, previous : Config?)
       @writer.create_or_clear_folder MIGRATION_FOLDER
       fd = @writer.create_and_open_file "#{MIGRATION_FOLDER}/migration_#{current.version}.pgsql"
-      current.models.each { |x| write_migration fd, x }
+      current.models.each { |x| write_table fd, x }
+      current.models.each { |x| write_relationship fd, x, current.models }
     ensure
       fd.close if fd
     end
 
-    def write_migration(fd : File, model : Config_::Model)
+    private def write_table(fd : File, model : Config_::Model)
       fd << ECR.render "src/mapie/task_runner/templates/migration.ecr"
     end
 
-    def open_migration_file(current_version : String) : File
+    private def write_relationship(fd : File, model : Config_::Model, models : Array(Config_::Model))
+      relationships = Array(Migration_::Relationship).new
+      model.format.each do |k, v|
+        unless v.one_to_one.nil?
+          rel = v.one_to_one.not_nil!
+          rel_model = models.find { |x| x.name == rel.related_to }.not_nil!
+          relationships << Migration_::Relationship.new "otm", model.table_name, k, rel_model.table_name, rel_model.format.first_key, nil
+          v.type = "#{v.type} UNIQUE" if v.type.index("UNIQUE").nil?
+        end
+        unless v.one_to_many.nil?
+          rel = v.one_to_many.not_nil!
+          rel_model = models.find { |x| x.name == rel.related_to }.not_nil!
+          relationships << Migration_::Relationship.new "mtm", model.table_name, k, rel_model.table_name, rel_model.format.first_key, nil
+        end
+      end
+      relationships.each { |relationship| fd << ECR.render "src/mapie/task_runner/templates/relationship.ecr" }
+    end
+
+    private def open_migration_file(current_version : String) : File
       @writer.create_folder_if_required MIGRATION_FOLDER
       @writer.create_and_open_file "#{MIGRATION_FOLDER}/migration_#{current.version}.pgsql"
+    end
+  end
+
+  module Migration_
+    class Relationship
+      getter type : String
+      getter table_name : String
+      getter foreign_key : String
+      getter reference_to : String
+      getter reference_key : String
+      getter rules : String
+
+      def initialize(@type : String, @table_name : String, @foreign_key : String, @reference_to : String, @reference_key : String, rules_as_nil : String?)
+        @rules = rules_as_nil.nil? ? "" : rules_as_nil
+      end
     end
   end
 end
