@@ -10,8 +10,12 @@ Create an API in a heartbeat.
 
 ## Usage
 
-1. Create a .pie file at the root of your project
+1. Create a yml file at the root of your project
 2. Run `mapie {your_project_name}.pie start`
+
+## Configuration Details
+
+See demo/mapie.yml for all a complete description
 
 ## Development
 

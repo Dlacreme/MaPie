@@ -1,36 +1,109 @@
-name: Mapie Demo
-description: Demo of the Mapie API system
-version: 0.1
+### Example Mapie Configuration file
+### All field not tagged as [OPT.] (optional) are mandatory
 
+name: Mapie Demo # Your project name
+description: Demo of the Mapie API system # Your project description [OPT. Default='']
+version: 0.1.0 # Your project version [OPT. Default='0.1.0']
+output: demo/project # Destination folder for the application
+
+# List of authors
 authors:
  - Mathieu <mathieu@kalvad.com>
 
+# Global settings
 settings:
-  secret_key: mysupersecretkey
-  database_url: postgres://postgres:@localhost:5432/mapie_demo
+  secret_key: mysupersecretkey # Secret key used for authentication and encryption
 
+# Database configuration
+database:
+  url: postgres://postgres:@localhost:5432/mapie_demo # Postgres Database URL
+  constraints: [] # array of constraints to apply on the database. [OPT.]
+
+# Setup authentication [OPT. No authentication if omitted]
 authentication:
   roles:
     - admin
     - user
 
+# Array of all models used in your API
+# Structure of a model:
+#
+#   name: name used to refer to your model in this file or as input/output of the API
+#   table_name: table name used in the database
+#   endpoint: endpoint used for your API [OPT. Default=@name]
+#   actions: actions available for this endpoint [OPT. Default=all]. List of all actions can be found at the end of this file
+#     {role}:
+#       - get
+#       - search
+#       - create
+#       - edit
+#   acl: [OPT. Default=all]
+#     owner: define what model is the owner of a record. Relative to current user
+#     {role}:
+#       read: define who can read. Relative to owner
+#       edit: define who can edit an existing record. Relative to owner
+#       delete: define who can delete an existing record. Relative to owner
+#   constraints: array of constraints to apply on this model [OPT.]
+#   format:
+#     {field_name}:
+#       type: POSTGRES type. Directly forwarded to PGSQL
+#       usage: flag this field for a specific usage. List of all usage at the end of this file [OPT.]
+#       one_to_one: flag this field as one to one relationship's foreign_key [OPT.]
+#       one_to_many: flag this field as one to many relationship's foreign_key [OPT.]
+#       many_to_many: flag this field as many to many relationship's foreign_key [OPT.]
+#
 models:
+
 
   -
     name: user
     table_name: users
     format:
-      id: UUID
-      name: VARCHAR(250)
-        #    seed:
-        #      -
-        #        name: "Mathieu"
-        #    api:
-        #      url: "/user"
-        #      GET:
-        #        access: public
-#     endpoints:
-#       -
-#         url: "/user/search"
-#         access: [admin]
+      id: {type: UUID PRIMARY KEY}
+      email: {type: VARCHAR(500) UNIQUE NOT NULL}
+      password: {type: VARCHAR(500) NOT NULL}
+      profile_id: {type: UUID UNIQUE, one_to_one: {related_to: profile, related_name: user}}
+      role: {type: VARCHAR(25) NOT NULL DEFAULT 'user', usage: authentication}
 
+  -
+    name: profile
+    table_name: user_profiles
+    format:
+      id: {type: UUID PRIMARY KEY}
+      first_name: {type: VARCHAR(255) DEFAULT 'John'}
+      last_name: {type: VARCHAR(255) DEFAULT 'DOE'}
+      picture_url: {type: VARCHAR(1024)}
+      description: {type: text}
+
+  -
+    name: friendship
+    table_name: user_friends
+    format:
+      from_user_id: {type: UUID}
+      to_user_id: {type: UUID}
+      created_at: {type: TIMESTAMP NOT NULL DEFAULT NOW}
+      validated_at: {type: TIMESTAMP NULL}
+    constraints: 
+      - PRIMARY KEY(from_user_id, to_user_id)
+
+  -
+    name: group
+    table_name: groups
+    format:
+      id: {type: UUID PRIMARY KEY}
+      created_by: {type: UUID NOT NULL, one_to_many: {related_to: user, related_name: groups}}
+      deleted_at: {type: TIMESTAMP NULL DEFAULT NULL, usage: soft_delete}
+
+## Glossary
+#
+# Model Action:
+#   - get: users can get request a record using
+#   - list: users can list all records available
+#   - search: users can search for a record
+#   - edit: user can edit an existing record
+#   - create: user can create a new record
+#   - delete: user can delete an existing record
+#
+# Model Format Usage:
+#   - authentication: this field is used for the authentication and will be used to store the 'roles' define in the authentication section
+#   - soft_delete: field used as a soft delete. Model using a soft delete will never hard delete a record from the database. The record is considered as DELETED if the value is NOT NULL or NOT FALSE

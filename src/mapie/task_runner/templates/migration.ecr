@@ -1,0 +1,24 @@
+-- --
+-- Model: <%= model.table_name %>
+
+CREATE TABLE <%= model.table_name %> (
+<%- model.format.each do |k, v| -%>
+  <%- unless model.format.first_key == k -%>
+,
+  <%- end -%>
+  <%= k %> <%= v.type -%>
+<%- end -%>
+<%- unless model.constraints.nil? -%>
+  <%-= "," %>
+  <%- model.constraints.not_nil!.each_with_index do |x, i| -%>
+  <%= x -%><%- unless i + 1 == model.constraints.not_nil!.size %><%= "," %><%- end %>
+  <%- end -%>
+<%- else -%>
+
+<%- end -%>
+);
+
+
+-- End: <%= model.table_name %>
+-- --
+
